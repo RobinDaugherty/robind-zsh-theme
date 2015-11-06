@@ -19,6 +19,8 @@ To test if your terminal and font support it, check that all the necessary chara
 
 ![Character Example](https://gist.githubusercontent.com/agnoster/3712874/raw/characters.png)
 
+If you are using a Powerline-patched font, and that still doesn't look right (especially the segment separator or branch symbols), then you may be using an old, incompatible version of the Powerline-patched fonts. Download and install a current version of the font.
+
 ## What does it show?
 
 - If the previous command failed (✘)
@@ -32,5 +34,15 @@ To test if your terminal and font support it, check that all the necessary chara
 
 ![Screenshot](https://gist.githubusercontent.com/agnoster/3712874/raw/screenshot.png)
 
-## Future Work
+# Installation
 
+
+# Configuration
+
+The theme can be configured by setting these environment variables:
+
+* `DEFAULT_USER` - A user name you typically log in as, and which should be omitted from the prompt display when you are that user.
+
+* `VIRTUAL_ENV_DISABLE_PROMPT` - If set, Python virtualenv will be disabled. It is enabled by default.
+
+## Future Work
