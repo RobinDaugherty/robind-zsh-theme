@@ -19,7 +19,7 @@ To test if your terminal and font support it, check that all the necessary chara
 
 ![Character Example](images/characters.png)
 
-If you are using a Powerline-patched font, and that still doesn't look right (especially the segment separator or branch symbols), then you may be using an old, incompatible version of the Powerline-patched fonts. Download and install a current version of the font.
+If you are using a Powerline-patched font, and that still doesn't look right (especially the segment separator or branch symbols), then you may be using an old, incompatible version of the Powerline-patched fonts. Download and install a current version of the font. [More detail here.](https://github.com/robbyrussell/oh-my-zsh/issues/4065)
 
 ## What does it show?
 
