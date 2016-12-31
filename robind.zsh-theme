@@ -30,6 +30,7 @@ define_prompt_chars() {
   # what font the user is viewing this source code in. Do not replace the
   # escape sequence with a single literal character.
   SEGMENT_SEPARATOR=$'\ue0b0'
+  RIGHT_SEGMENT_SEPARATOR=$'\ue0b2'
   PLUSMINUS=$'\u00b1'
   BRANCH=$'\ue0a0'
   DETACHED=$'\u27a6'
@@ -72,6 +73,21 @@ prompt_end() {
   print -n "%{%f%}"
   CURRENT_BG=''
 }
+
+# Begin a segment in the Right prompt
+# Takes two arguments, background and foreground. Both can be omitted,
+# rendering default background/foreground.
+right_prompt_segment() {
+  local bg fg
+  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  define_prompt_chars
+  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
+  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  print -n "%F{$1}%K{$CURRENT_RIGHT_BG}$RIGHT_SEGMENT_SEPARATOR%{$fg$bg%}"
+  CURRENT_RIGHT_BG=$1
+  [[ -n $3 ]] && print -n $3
+}
+
 
 ### Prompt components
 # Each component will draw itself, and hide itself if no information needs to be shown
@@ -192,6 +208,11 @@ prompt_robind_main() {
   prompt_end
 }
 
+prompt_robind_main_right() {
+  right_prompt_segment white black " %D{%H:%M:%S} "
+  right_prompt_segment black white " %D{%a %f %h %Y}"
+}
+
 prompt_robind_precmd() {
   vcs_info
 }
@@ -214,6 +235,8 @@ prompt_robind_setup() {
 
   setopt prompt_subst
   PROMPT='%{%f%b%k%}$(prompt_robind_main) '
+
+  RPROMPT='%{%f%b%k%}$(prompt_robind_main_right)%{%f%b%k%}'
 }
 
 prompt_robind_setup "$@"

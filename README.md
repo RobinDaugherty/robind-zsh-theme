@@ -23,6 +23,7 @@ If you are using a Powerline-patched font, and that still doesn't look right (es
 
 ## What does it show?
 
+- The current date and time on the right
 - If the previous command failed (✘)
 - User @ Hostname (if user is not DEFAULT_USER, which can then be set in your profile)
 - Git status
