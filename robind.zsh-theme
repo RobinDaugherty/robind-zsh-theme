@@ -125,8 +125,8 @@ prompt_git() {
       ref="$DETACHED ${ref/.../}"
     fi
 
-    prompt_segment $color $PRIMARY_FG
-    print -Pn " $ref$mode"
+    right_prompt_segment $color $PRIMARY_FG
+    print -Pn " $ref$mode "
   fi
 }
 
@@ -158,15 +158,15 @@ prompt_hg() {
     if $(hg prompt >/dev/null 2>&1); then
       if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
         # if files are not added
-        prompt_segment red white
+        right_prompt_segment red white
         st='±'
       elif [[ -n $(hg prompt "{status|modified}") ]]; then
         # if any modification
-        prompt_segment yellow black
+        right_prompt_segment yellow black
         st='±'
       else
         # if working copy is clean
-        prompt_segment green black
+        right_prompt_segment green black
       fi
       echo -n $(hg prompt "☿ {rev}@{branch}") $st
     else
@@ -174,13 +174,13 @@ prompt_hg() {
       rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
       branch=$(hg id -b 2>/dev/null)
       if `hg st | grep -q "^\?"`; then
-        prompt_segment red black
+        right_prompt_segment red black
         st='±'
       elif `hg st | grep -q "^[MA]"`; then
-        prompt_segment yellow black
+        right_prompt_segment yellow black
         st='±'
       else
-        prompt_segment green black
+        right_prompt_segment green black
       fi
       echo -n "☿ $rev@$branch" $st
     fi
@@ -191,7 +191,7 @@ prompt_hg() {
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment blue black "(`basename $virtualenv_path`)"
+    right_prompt_segment blue black "(`basename $virtualenv_path`)"
   fi
 }
 
@@ -209,24 +209,28 @@ prompt_ruby() {
   fi
 }
 
+prompt_time() {
+  prompt_segment black white "%D{%a %f %h %Y} "
+  prompt_segment white black " %D{%H:%M:%S} "
+}
+
 
 ## Main prompt
 prompt_robind_main() {
   RETVAL=$?
   local CURRENT_BG='NONE'
+  prompt_time
   prompt_status
-  prompt_virtualenv
   prompt_context
   prompt_dir
-  prompt_git
-  prompt_hg
   prompt_end
 }
 
 prompt_robind_main_right() {
+  prompt_git
+  prompt_hg
   prompt_ruby
-  right_prompt_segment white black " %D{%H:%M:%S} "
-  right_prompt_segment black white " %D{%a %f %h %Y}"
+  prompt_virtualenv
 }
 
 prompt_robind_precmd() {
