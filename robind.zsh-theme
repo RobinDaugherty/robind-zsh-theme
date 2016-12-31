@@ -15,7 +15,7 @@ fi
 
 ### Special Powerline characters
 # Defines vars with the special prompt and Powerline characters
-# Use this in conjunction with "local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR"
+# Use this in conjunction with "local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL"
 # in the caller to keep from leaking these into the main shell session
 define_prompt_chars() {
   # Force Unicode interpretation of chars, even under odd locales
@@ -37,6 +37,7 @@ define_prompt_chars() {
   CROSS=$'\u2718'
   LIGHTNING=$'\u26a1'
   GEAR=$'\u2699'
+  RUBY_SYMBOL="rb"
 }
 
 
@@ -48,7 +49,7 @@ define_prompt_chars() {
 # rendering default background/foreground.
 prompt_segment() {
   local bg fg
-  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
   define_prompt_chars
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
@@ -63,7 +64,7 @@ prompt_segment() {
 
 # End the prompt, closing any open segments
 prompt_end() {
-  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
   define_prompt_chars
   if [[ -n $CURRENT_BG ]]; then
     print -n "%{%K%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%k"
@@ -79,7 +80,7 @@ prompt_end() {
 # rendering default background/foreground.
 right_prompt_segment() {
   local bg fg
-  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
   define_prompt_chars
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
@@ -104,7 +105,7 @@ prompt_context() {
 # Git: branch/detached head, dirty status
 prompt_git() {
   local color ref mode
-  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
   define_prompt_chars
   is_dirty() {
     test -n "$(git status --porcelain --ignore-submodules)"
@@ -139,7 +140,7 @@ prompt_dir() {
 # - am I root
 # - are there background jobs?
 prompt_status() {
-  local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
   define_prompt_chars
   local symbols
   symbols=()
@@ -194,6 +195,20 @@ prompt_virtualenv() {
   fi
 }
 
+# Current Ruby version
+prompt_ruby() {
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR RUBY_SYMBOL
+  define_prompt_chars
+
+  local ruby_version
+  if [ ${RBENV_ROOT} ]; then
+    ruby_version=$(rbenv version-name)
+  fi
+  if [ ${ruby_version} ]; then
+    right_prompt_segment magenta black " ${RUBY_SYMBOL}${ruby_version} "
+  fi
+}
+
 
 ## Main prompt
 prompt_robind_main() {
@@ -209,6 +224,7 @@ prompt_robind_main() {
 }
 
 prompt_robind_main_right() {
+  prompt_ruby
   right_prompt_segment white black " %D{%H:%M:%S} "
   right_prompt_segment black white " %D{%a %f %h %Y}"
 }
