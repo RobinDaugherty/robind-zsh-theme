@@ -3,33 +3,17 @@
 # robind's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH
 #
-# # README
-#
-# In order for this theme to render correctly, you will need a
-# [Powerline-patched font](https://gist.github.com/1595572).
-#
-# In addition, I recommend the
-# [Solarized theme](https://github.com/altercation/solarized/) and, if you're
-# using it on Mac OS X, [iTerm 2](http://www.iterm2.com/) over Terminal.app -
-# it has significantly better color fidelity.
-#
-# # Goals
-#
-# The aim of this theme is to only show you *relevant* information. Like most
-# prompts, it will only show git information when in a git working directory.
-# However, it goes a step further: everything from the current user and
-# hostname to whether the last call exited with an error to whether background
-# jobs are running in this shell will all be displayed automatically when
-# appropriate.
-
-### Segment drawing
-# A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-PRIMARY_FG=black
 
-# Special Powerline characters
+if [[ "$AGNOSTER_LIGHT" = "1" ]]; then
+ 	PRIMARY_FG=white
+else
+ 	PRIMARY_FG=black
+fi
 
+
+### Special Powerline characters
 # Defines vars with the special prompt and Powerline characters
 # Use this in conjunction with "local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR"
 # in the caller to keep from leaking these into the main shell session
@@ -45,7 +29,7 @@ define_prompt_chars() {
   # This is defined using a Unicode escape sequence so it is unambiguously readable, regardless of
   # what font the user is viewing this source code in. Do not replace the
   # escape sequence with a single literal character.
-  SEGMENT_SEPARATOR=$'\ue0b0' # 
+  SEGMENT_SEPARATOR=$'\ue0b0'
   PLUSMINUS=$'\u00b1'
   BRANCH=$'\ue0a0'
   DETACHED=$'\u27a6'
@@ -54,6 +38,9 @@ define_prompt_chars() {
   GEAR=$'\u2699'
 }
 
+
+### Segment drawing
+# A few utility functions to make it easy and re-usable to draw segmented prompts
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
