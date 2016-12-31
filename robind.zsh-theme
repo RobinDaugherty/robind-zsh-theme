@@ -78,7 +78,7 @@ prompt_end() {
   local SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR
   define_prompt_chars
   if [[ -n $CURRENT_BG ]]; then
-    print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    print -n "%{%K%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%k"
   else
     print -n "%{%k%}"
   fi
