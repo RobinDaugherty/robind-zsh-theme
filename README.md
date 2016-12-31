@@ -30,6 +30,7 @@ If you are using a Powerline-patched font, and that still doesn't look right (es
   - Current branch / SHA1 in detached head state
   - Dirty working directory (±, color change)
 - Working directory
+- Name of the currently active Python virtual environment
 - Elevated (root) privileges (⚡)
 
 ![Screenshot](images/screenshot.png)
