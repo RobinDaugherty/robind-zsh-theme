@@ -23,16 +23,18 @@ If you are using a Powerline-patched font, and that still doesn't look right (es
 
 ## What does it show?
 
-- The current date and time on the right
-- If the previous command failed (✘)
-- User @ Hostname (if user is not DEFAULT_USER, which can then be set in your profile)
-- Git status
-  - Branch (![Branch Character](images/branch.png)) or detached head (➦)
-  - Current branch / SHA1 in detached head state
-  - Dirty working directory (±, color change)
-- Working directory
-- Name of the currently active Python virtual environment
+- The current date and time
+- Indication that the previous command failed (✘)
 - Elevated (root) privileges (⚡)
+- Indication of background tasks (⚙)
+- User and hostname (if user is not `$DEFAULT_USER`, see below)
+- Working directory
+- Git and/or Mercurial status
+  - Branch (![Branch Character](images/branch.png)) or detached head (➦)
+  - Current branch or commit hash if in detached head state
+  - Dirty working directory (±, color change)
+- Active Ruby version (if [rbenv](https://github.com/rbenv/rbenv) is available)
+- Name of the currently active Python virtual environment (if `$VIRTUAL_ENV` is set)
 
 ![Screenshot](images/screenshot.png)
 
@@ -59,3 +61,6 @@ The theme can be configured by setting these environment variables:
 * `VIRTUAL_ENV_DISABLE_PROMPT` - If set, Python virtualenv will be disabled. It is enabled by default.
 
 ## Future Work
+
+- Support for `rvm`
+- Node version if using `nvm`
