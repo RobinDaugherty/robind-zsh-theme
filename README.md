@@ -35,7 +35,7 @@ Paste these commands to install the latest version of this theme and activate it
 ```sh
 mkdir -p ~/.oh-my-zsh/custom/themes
 curl https://raw.githubusercontent.com/RobinDaugherty/robind-zsh-theme/master/robind.zsh-theme > ~/.oh-my-zsh/custom/themes/robind.zsh-theme
-echo 'export ZSH_THEME="robind"' >> ~/.zshrc
+sed -i '.before-robind' -E 's/ZSH_THEME=.+$/ZSH_THEME="robind"/' ~/.zshrc
 ```
 
 Or, if you prefer to do it manually, place the theme file in your `.oh-my-zsh/custom/themes/` directory (create the directory if it doesn't exist) and set your `ZSH_THEME` to "robind".
