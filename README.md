@@ -1,7 +1,7 @@
 # robind.zsh-theme
 
 A ZSH theme forked from [agnoster's theme](https://github.com/agnoster/agnoster-zsh-theme),
-with the addition of the current date and time.
+with the addition of the current Ruby and Node version, current date and time and full hostname in SSH sessions.
 
 ![Screenshot](images/screenshot.png)
 
