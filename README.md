@@ -18,6 +18,7 @@ This theme shows:
   - Current branch, or commit hash if in detached head state
   - Dirty working directory (±, color change)
 - Active Ruby version (if [rbenv](https://github.com/rbenv/rbenv) is available)
+- Active Node version (if [nodenv](https://github.com/nodenv/nodenv) is available)
 - Name of the currently active Python virtual environment (if `$VIRTUAL_ENV` is set)
 
 Optimized for:
@@ -72,4 +73,4 @@ The theme can be configured by setting these environment variables:
 ## Future Work
 
 - Support for `rvm`
-- Node version if using `nvm` or `nodenv`
+- Support for `nvm`
