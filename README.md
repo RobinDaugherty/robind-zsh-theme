@@ -59,7 +59,7 @@ If you're not using one of the above terminal apps, to test if your terminal and
 
 ![Character Example](images/characters.png)
 
-If you are using a Powerline-patched font, and that still doesn't look right (especially the segment separator or branch symbols), then you may be using an old, incompatible version of the Powerline-patched fonts. ([They changed the character codes a few years ago.]((https://github.com/robbyrussell/oh-my-zsh/issues/4065)) [Install a current version of the font.](https://github.com/powerline/fonts)
+If you are using a Powerline-patched font, and that still doesn't look right (especially the segment separator or branch symbols), then you may be using an old, incompatible version of the Powerline-patched fonts. ([They changed the character codes a few years ago.](https://github.com/robbyrussell/oh-my-zsh/issues/4065)) [Install a current version of the font.](https://github.com/powerline/fonts)
 
 # Configuration
 
