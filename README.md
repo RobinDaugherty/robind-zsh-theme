@@ -7,7 +7,7 @@ with the addition of the current date and time.
 
 This theme shows:
 
-- The time that the prompt was shown.
+- The date and time (for SSH sessions)
 - Indication when the previous command failed (✘)
 - Elevated (root) privileges (⚡)
 - Presence of background tasks (⚙)

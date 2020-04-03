@@ -223,8 +223,10 @@ prompt_node() {
 }
 
 prompt_time() {
-  prompt_segment black white "%D{%a %f %h %Y} "
-  prompt_segment white black " %D{%H:%M:%S} "
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    prompt_segment black white "%D{%a %f %h %Y} "
+    prompt_segment white black " %D{%H:%M:%S} "
+  fi
 }
 
 
@@ -232,7 +234,7 @@ prompt_time() {
 prompt_robind_main() {
   RETVAL=$?
   local CURRENT_BG='NONE'
-  # prompt_time
+  prompt_time
   prompt_status
   prompt_context
   prompt_dir
