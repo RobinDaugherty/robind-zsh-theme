@@ -219,7 +219,7 @@ prompt_time() {
 prompt_robind_main() {
   RETVAL=$?
   local CURRENT_BG='NONE'
-  prompt_time
+  # prompt_time
   prompt_status
   prompt_context
   prompt_dir
