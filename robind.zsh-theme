@@ -38,6 +38,7 @@ define_prompt_chars() {
   LIGHTNING=$'\u26a1'
   GEAR=$'\u2699'
   RUBY_SYMBOL="rb"
+  NODE_SYMBOL="n"
 }
 
 
@@ -204,8 +205,20 @@ prompt_ruby() {
   if [ ${RBENV_ROOT} ]; then
     ruby_version=$(rbenv version-name)
   fi
-  if [ ${ruby_version} ]; then
+  if [ -n ${ruby_version} ] && [ "${ruby_version}" != "system" ]; then
     right_prompt_segment magenta black " ${RUBY_SYMBOL}${ruby_version} "
+  fi
+}
+
+# Current Node version
+prompt_node() {
+  local SEGMENT_SEPARATOR RIGHT_SEGMENT_SEPARATOR BRANCH DETACHED PLUSMINUS CROSS LIGHTNING GEAR NODE_SYMBOL
+  define_prompt_chars
+
+  local node_version
+  node_version=$(nodenv version-name)
+  if [ $? -eq 0 ] && [ -n ${node_version} ] && [ "${node_version}" != "system" ]; then
+    right_prompt_segment green black " ${NODE_SYMBOL}${node_version} "
   fi
 }
 
@@ -230,6 +243,7 @@ prompt_robind_main_right() {
   prompt_git
   prompt_hg
   prompt_ruby
+  prompt_node
   prompt_virtualenv
 }
 
