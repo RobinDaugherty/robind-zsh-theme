@@ -202,10 +202,8 @@ prompt_ruby() {
   define_prompt_chars
 
   local ruby_version
-  if [ ${RBENV_ROOT} ]; then
-    ruby_version=$(rbenv version-name)
-  fi
-  if [ -n ${ruby_version} ] && [ "${ruby_version}" != "system" ]; then
+  ruby_version=$(rbenv version-name 2> /dev/null)
+  if [ $? -eq 0 ] && [ -n ${ruby_version} ] && [ "${ruby_version}" != "system" ]; then
     right_prompt_segment magenta black " ${RUBY_SYMBOL}${ruby_version} "
   fi
 }
@@ -216,7 +214,7 @@ prompt_node() {
   define_prompt_chars
 
   local node_version
-  node_version=$(nodenv version-name)
+  node_version=$(nodenv version-name 2> /dev/null)
   if [ $? -eq 0 ] && [ -n ${node_version} ] && [ "${node_version}" != "system" ]; then
     right_prompt_segment green black " ${NODE_SYMBOL}${node_version} "
   fi
