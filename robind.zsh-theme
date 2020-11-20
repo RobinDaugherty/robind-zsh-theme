@@ -212,7 +212,7 @@ prompt_ruby() {
     fi
   fi
   if [ -n "${ruby_version}" ] && [ "${ruby_version}" != "system" ]; then
-    right_prompt_segment magenta black " ${RUBY_SYMBOL}${ruby_version} "
+    right_prompt_segment black magenta " ${RUBY_SYMBOL}${ruby_version} "
   fi
 }
 
@@ -232,7 +232,7 @@ prompt_node() {
     fi
   fi
   if [ -n "${node_version}" ] && [ "${node_version}" != "system" ]; then
-    right_prompt_segment green black " ${NODE_SYMBOL}${node_version} "
+    right_prompt_segment black green " ${NODE_SYMBOL}${node_version} "
   fi
 }
 
