@@ -202,8 +202,16 @@ prompt_ruby() {
   define_prompt_chars
 
   local ruby_version
-  ruby_version=$(rbenv version-name 2> /dev/null)
-  if [ $? -eq 0 ] && [ -n ${ruby_version} ] && [ "${ruby_version}" != "system" ]; then
+  if [ ${RBENV_ROOT} ]; then
+    ruby_version=$(rbenv version-name)
+  elif [ ${ASDF_DIR} ]; then
+    asdf_version=$(asdf current ruby 2>&1)
+    if [[ $asdf_version =~ "No version set" ]]; then
+    elif [[ $asdf_version =~ "^ruby +([^ ]+).+" ]]; then
+      ruby_version="${match[1]}"
+    fi
+  fi
+  if [ -n "${ruby_version}" ] && [ "${ruby_version}" != "system" ]; then
     right_prompt_segment magenta black " ${RUBY_SYMBOL}${ruby_version} "
   fi
 }
@@ -214,8 +222,16 @@ prompt_node() {
   define_prompt_chars
 
   local node_version
-  node_version=$(nodenv version-name 2> /dev/null)
-  if [ $? -eq 0 ] && [ -n ${node_version} ] && [ "${node_version}" != "system" ]; then
+  if [ ${NODENV_SHELL} ]; then
+    node_version=$(nodenv version-name)
+  elif [ ${ASDF_DIR} ]; then
+    asdf_version=$(asdf current nodejs 2>&1)
+    if [[ $asdf_version =~ "No version set" ]]; then
+    elif [[ $asdf_version =~ "^nodejs +([^ ]+).+" ]]; then
+      node_version="${match[1]}"
+    fi
+  fi
+  if [ -n "${node_version}" ] && [ "${node_version}" != "system" ]; then
     right_prompt_segment green black " ${NODE_SYMBOL}${node_version} "
   fi
 }
